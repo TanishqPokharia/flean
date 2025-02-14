@@ -14,9 +14,12 @@ import (
 // removeCmd represents the remove command
 var removeCmd = &cobra.Command{
 	Use:   "remove",
-	Short: "A brief description of your command",
-	Long:  ``,
-	Args:  cobra.ExactArgs(1),
+	Short: "Removes the entire feature from the features folder inside feature first architecture project",
+	Long: `This command takes the feature's name as the argument and removes that feature including it's data, domain and presentation layers
+for that particular feature from the features folder.
+`,
+	Example: "flean feature remove profile(profile is the name of the feature)",
+	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		err := services.RemoveFeatureClean(args[0])
 		if err != nil {

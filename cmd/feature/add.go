@@ -15,9 +15,12 @@ import (
 // addCmd represents the add command
 var addCmd = &cobra.Command{
 	Use:   "add",
-	Short: "add a feature to your ff clean architecture project inside the features folder",
-	Long:  ``,
-	Args:  cobra.ExactArgs(1),
+	Short: "Adds a feature to your feature first clean architecture project inside the features folder",
+	Long: `This command takes the feature's name as the argument and generates the data, domain and presentation layers
+for that particular feature in the features folder.
+`,
+	Example: "flean feature add profile(profile is the name of the feature)",
+	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		path, err := os.Getwd()
 		if err != nil {

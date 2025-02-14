@@ -16,7 +16,10 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "flean",
 	Short: fmt.Sprintf("%s\nFlean - Open-source Flutter app architecture generator and manager\n", tui.LogStyle.Bold(true).Render(constants.Logo)),
-	Long:  ``,
+	Long: tui.LogStyle.Bold(true).Render(constants.Logo) + "\n" + `Flean is an open source flutter clean app architecture generation and management tool that helps developers manage their flutter
+project seamlessly and enhance the flutter development experience.
+It also facilitates managing verbose blocs and cubits within the project just with basic cli commands making project management less annoying.
+`,
 	Run: func(cmd *cobra.Command, args []string) {
 		err := cmd.Help()
 		if err != nil {

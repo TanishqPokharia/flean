@@ -14,11 +14,24 @@ import (
 
 // createCmd represents the create command
 var createCmd = &cobra.Command{
-	Use:     "create",
-	Short:   "Create a new flutter project with desired architecture",
-	Long:    ``,
+	Use:   "create",
+	Short: "Create a new flutter project with desired architecture",
+	Long: `IMPORTANT: flutter must be globally configured in the machine in order to execute this command
+
+This command is used to bootstrap your flutter project with one of the following architectures:
+1. Clean Architecture
+2. Feature First Clean Architecture
+3. MVVM
+4. MVC
+
+It also provides a list of popular dependencies commonly used in flutter projects and includes them
+in the project and updates the project accordingly.
+
+A flean.yaml file is then generated inside the project to keep track of some meta-data which flean utilizes
+for project management internally.
+`,
 	Args:    cobra.ExactArgs(1),
-	Example: "  flean create my_flutter_app",
+	Example: "flean create my_flutter_app",
 	Run: func(cmd *cobra.Command, args []string) {
 		startTui(args[0])
 	},

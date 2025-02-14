@@ -9,13 +9,11 @@ import (
 var addCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Adds a bloc inside the project",
-	Long: `
-	This command takes the bloc's name as argument and adds that bloc from the path specified in the flean.yaml file
-	The path from which to remove the bloc is stored inside the flean.yaml file and can be modified.
-	Sample Usage:
-		flean bloc add auth
+	Long: `This command takes the bloc's name as argument and adds that bloc from the path specified in the flean.yaml file
+The path from which to remove the bloc is stored inside the flean.yaml file and can be modified.
 `,
-	Args: cobra.ExactArgs(1),
+	Example: "flean bloc add auth(auth is the name of the bloc)",
+	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		blocName := args[0]
 		services.GenerateBloc(blocName)

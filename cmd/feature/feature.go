@@ -12,7 +12,8 @@ import (
 var Cmd = &cobra.Command{
 	Use:   "feature",
 	Short: "Manage features in a feature first architecture flutter app",
-	Long:  ``,
+	Long: `This command is used to add or remove features from the features folder in a feature first architecture project.
+`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := cmd.Help(); err != nil {
 			utils.LogFatalError(err)

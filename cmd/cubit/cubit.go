@@ -12,12 +12,8 @@ import (
 var Cmd = &cobra.Command{
 	Use:   "cubit",
 	Short: "Manage cubits inside your application",
-	Long: `
-	This command can be used with add & remove subcommands to manage cubits inside your application.
-	The path from which to add or remove the cubit is stored inside the flean.yaml file and can be modified.
-	Sample Usage:
-		flean cubit add auth
-		flean cubit remove auth
+	Long: `This command can be used with add & remove subcommands to manage cubits inside your application.
+The path from which to add or remove the cubit is stored inside the flean.yaml file and can be modified.
 `,
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := cmd.Help(); err != nil {

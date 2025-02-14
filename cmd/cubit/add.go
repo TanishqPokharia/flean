@@ -12,13 +12,11 @@ import (
 var addCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Adds a cubit inside the project",
-	Long: `
-	This command takes the cubit's name as argument and adds that cubit from the path specified in the flean.yaml file
-	The path from which to add the cubit is stored inside the flean.yaml file and can be modified.
-	Sample Usage:
-		flean cubit add auth
+	Long: `This command takes the cubit's name as argument and adds that cubit from the path specified in the flean.yaml file
+The path from which to add the cubit is stored inside the flean.yaml file and can be modified.
 `,
-	Args: cobra.ExactArgs(1),
+	Example: "flean cubit add auth (auth is the name of the cubit)",
+	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		services.GenerateCubit(args[0])
 	},
