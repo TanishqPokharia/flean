@@ -1,7 +1,7 @@
 # Flean
 ### IMPORTANT: Flutter needs to be globally installed as Flean uses it internally for project creation
-Flean is an open source flutter clean app architecture generation and management tool that helps developers manage their flutter
-project seamlessly and enhance the flutter development experience.
+Flean is an open source Flutter app architecture generation and management tool that helps developers manage their Flutter
+project seamlessly and enhance the Flutter development experience.
 It also facilitates managing verbose blocs and cubits within the project just with basic cli commands making project management less annoying.
 
 ## Go Libraries and Tools used
@@ -23,7 +23,7 @@ Using app architectures makes the code more manageable and scalable but at the s
 
 That's when the idea to make a simple and intuitive CLI tool to manage my projects came into being!  
 Flean was initially just a thought to manage Flutter Clean Architecture projects (which is where it gets it's name from) but this project definitely has more room for flexibility and growth
-which can make it a one stop solution for all flutter project management needs.
+which can make it a one stop solution for all Flutter project management needs.
 ## Installation Guide
 Follow these steps to install flean:
 
