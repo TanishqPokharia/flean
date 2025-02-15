@@ -7,12 +7,13 @@ import (
 	"flean/tui"
 	"flean/utils"
 	"fmt"
+	"github.com/charmbracelet/lipgloss"
 	"os"
 	"strings"
 	"text/template"
 )
 
-func GenerateBloc(name string) {
+func GenerateBloc(name string, feature string) {
 	pwd, err := os.Getwd()
 	if err != nil {
 		utils.LogFatalError(err)
@@ -22,14 +23,25 @@ func GenerateBloc(name string) {
 		utils.LogFatalError(err)
 	}
 	rootPath := details.Directory + "/" + details.Name
+
+	// handle path for the bloc in a specific feature
 	lower := strings.ToLower(name)
-	path := fmt.Sprintf("%s/lib%s/%s", rootPath, details.BlocPath, lower)
+
+	// add the bloc to constructed path
+	path := ""
+	if feature != "" {
+		path = fmt.Sprintf("%s/lib/features/%s/%s/%s", rootPath, feature, details.BlocPath, lower)
+	} else {
+		path = fmt.Sprintf("%s/lib%s/%s", rootPath, details.BlocPath, lower)
+	}
+
+	// check if the bloc already exists
 	dir, err := os.Stat(path)
-	if !errors.Is(err, os.ErrNotExist) {
+	if err != nil && !errors.Is(err, os.ErrNotExist) {
 		utils.LogFatalError(err)
 	}
 	if dir != nil && dir.IsDir() {
-		fmt.Printf("%s bloc already exists\n", name)
+		fmt.Printf(lipgloss.NewStyle().Foreground(tui.Red).Render(fmt.Sprintf("%s bloc already exists\n", name)))
 		return
 	}
 	err = os.MkdirAll(path, os.FileMode(constants.FilePermission))

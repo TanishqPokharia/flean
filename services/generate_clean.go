@@ -1,9 +1,13 @@
 package services
 
 import (
+	"errors"
 	"flean/constants"
+	"flean/tui"
 	"flean/utils"
 	"fmt"
+	"github.com/charmbracelet/lipgloss"
+	"log"
 	"os"
 )
 
@@ -21,10 +25,20 @@ func GenerateFFBase(name string) {
 	generateFeatures(name)
 }
 
-func GenerateFFClean(path string) {
+func GenerateFFClean(path string, name string) {
+	_, err := os.Stat(path)
+	dir, err := os.Stat(path)
+	if err != nil && !errors.Is(err, os.ErrNotExist) {
+		utils.LogFatalError(err)
+	}
+	if dir != nil && dir.IsDir() {
+		fmt.Printf(lipgloss.NewStyle().Foreground(tui.Red).Render(fmt.Sprintf("%s feature already exists\n", name)))
+		return
+	}
 	generateData(path)
 	generateDomain(path)
 	generatePresentation(path)
+	fmt.Println(tui.LogStyle.Render(fmt.Sprintf("%s feature added\n", name)))
 }
 
 func RemoveFeatureClean(name string) error {
@@ -37,6 +51,14 @@ func RemoveFeatureClean(name string) error {
 		return err
 	}
 	path := fmt.Sprintf("%s/%s/lib/features/%s", details.Directory, details.Name, name)
+	_, err = os.Stat(path)
+	if err != nil {
+		if errors.Is(err, os.ErrNotExist) {
+			log.Fatal(lipgloss.NewStyle().Foreground(tui.Red).Render(fmt.Sprintf("%s feature does not exist", name)))
+		} else {
+			utils.LogFatalError(err)
+		}
+	}
 	err = os.RemoveAll(path)
 	if err != nil {
 		return err

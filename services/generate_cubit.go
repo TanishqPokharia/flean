@@ -12,7 +12,7 @@ import (
 	"text/template"
 )
 
-func GenerateCubit(name string) {
+func GenerateCubit(name string, feature string) {
 	pwd, err := os.Getwd()
 	if err != nil {
 		utils.LogFatalError(err)
@@ -22,7 +22,15 @@ func GenerateCubit(name string) {
 		utils.LogFatalError(err)
 	}
 	rootPath := details.Directory + "/" + details.Name
-	lower := strings.ToLower(name)
+
+	// handle path for the bloc in a specific feature
+	lower := ""
+	if feature != "" {
+		lower += fmt.Sprintf("/features/%s/", strings.ToLower(feature))
+	}
+	lower += strings.ToLower(name)
+
+	// add the bloc to constructed path
 	cubitPath := strings.Split(details.BlocPath, "/bloc")[0] + "/cubit"
 	path := fmt.Sprintf("%s/lib%s/%s", rootPath, cubitPath, lower)
 	_, err = os.Stat(path)

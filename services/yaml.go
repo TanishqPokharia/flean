@@ -25,7 +25,7 @@ func StoreProjectDetails(projectName string, arch string) error {
 		return errors.New("warning! Could not get directory details, please add the directory path manually")
 	}
 	config := FleanYaml{Name: projectName, Directory: pwd, Architecture: arch}
-	if arch == "Clean" || arch == "Feature First" {
+	if arch == "Clean" || arch == "Feature First Clean" {
 		config.BlocPath = "/presentation/bloc"
 	}
 	if arch == "MVVM" || arch == "MVC" {

@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-func RemoveBloc(name string) {
+func RemoveBloc(name string, feature string) {
 	pwd, err := os.Getwd()
 	style := lipgloss.NewStyle()
 	if err != nil {
@@ -22,8 +22,17 @@ func RemoveBloc(name string) {
 		log.Fatal(err)
 	}
 	rootPath := details.Directory + "/" + details.Name
+
+	// handle path for the bloc in a specific feature
 	lower := strings.ToLower(name)
-	path := fmt.Sprintf("%s/lib%s/%s", rootPath, details.BlocPath, lower)
+
+	// remove the bloc
+	path := ""
+	if feature != "" {
+		path = fmt.Sprintf("%s/lib/features/%s/%s/%s", rootPath, feature, details.BlocPath, lower)
+	} else {
+		path = fmt.Sprintf("%s/lib%s/%s", rootPath, details.BlocPath, lower)
+	}
 	_, err = os.Stat(path)
 	if err != nil {
 		if errors.Is(err, os.ErrNotExist) {
@@ -36,5 +45,5 @@ func RemoveBloc(name string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("%s bloc removed\n", name)
+	fmt.Print(tui.LogStyle.Render(fmt.Sprintf("%s bloc removed\n", name)))
 }
