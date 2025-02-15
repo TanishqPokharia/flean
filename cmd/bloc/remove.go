@@ -2,6 +2,7 @@ package bloc
 
 import (
 	"flean/services"
+	"flean/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -15,7 +16,11 @@ The path from which to remove the bloc is stored inside the flean.yaml file and 
 	Example: "flean bloc remove auth(auth is the name of the bloc)",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		services.RemoveBloc(args[0])
+		featureName, err := cmd.Flags().GetString("feature")
+		if err != nil {
+			utils.LogFatalError(err)
+		}
+		services.RemoveBloc(args[0], featureName)
 	},
 }
 

@@ -5,7 +5,6 @@ package feature
 
 import (
 	"flean/services"
-	"flean/tui"
 	"flean/utils"
 	"fmt"
 	"github.com/spf13/cobra"
@@ -28,8 +27,7 @@ for that particular feature in the features folder.
 		}
 		details, err := services.GetProjectDetails(path)
 		path = fmt.Sprintf("%s/%s/lib/features/%s", details.Directory, details.Name, args[0])
-		services.GenerateFFClean(path)
-		fmt.Println(tui.LogStyle.Render(fmt.Sprintf("%s feature added\n", args[0])))
+		services.GenerateFFClean(path, args[0])
 	},
 }
 

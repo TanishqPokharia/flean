@@ -5,6 +5,7 @@ package cubit
 
 import (
 	"flean/services"
+	"flean/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -18,7 +19,11 @@ The path from which to add the cubit is stored inside the flean.yaml file and ca
 	Example: "flean cubit add auth (auth is the name of the cubit)",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		services.GenerateCubit(args[0])
+		featureName, err := cmd.Flags().GetString("feature")
+		if err != nil {
+			utils.LogFatalError(err)
+		}
+		services.GenerateCubit(args[0], featureName)
 	},
 }
 

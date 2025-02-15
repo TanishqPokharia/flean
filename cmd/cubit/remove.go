@@ -2,6 +2,7 @@ package cubit
 
 import (
 	"flean/services"
+	"flean/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -14,7 +15,11 @@ The path from which to remove the cubit is stored inside the flean.yaml file and
 `,
 	Example: "flean cubit remove auth(auth is the name of the cubit)",
 	Run: func(cmd *cobra.Command, args []string) {
-		services.RemoveCubit(args[0])
+		featureName, err := cmd.Flags().GetString("feature")
+		if err != nil {
+			utils.LogFatalError(err)
+		}
+		services.RemoveCubit(args[0], featureName)
 	},
 }
 
